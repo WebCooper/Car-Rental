@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="CarRent">
+        <addColumn tableName="VEHICLE">
+            <column name="BOOKING_ID" type="UUID"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2" author="CarRent">
+        <createIndex indexName="IDX_VEHICLE_BOOKING" tableName="VEHICLE">
+            <column name="BOOKING_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="BOOKING_ID" baseTableName="VEHICLE"
+                                 constraintName="FK_VEHICLE_ON_BOOKING" referencedColumnNames="ID"
+                                 referencedTableName="BOOKING"/>
+    </changeSet>
+</databaseChangeLog>

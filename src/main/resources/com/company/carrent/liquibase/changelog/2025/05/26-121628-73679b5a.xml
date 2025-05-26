@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="CarRent">
+        <addColumn tableName="BOOKING">
+            <column name="CREATED_BY_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="CREATED_BY_ID" tableName="BOOKING"/>
+    </changeSet>
+    <changeSet id="2" author="CarRent">
+        <createIndex indexName="IDX_BOOKING_CREATED_BY" tableName="BOOKING">
+            <column name="CREATED_BY_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CREATED_BY_ID" baseTableName="BOOKING"
+                                 constraintName="FK_BOOKING_ON_CREATED_BY" referencedColumnNames="ID"
+                                 referencedTableName="USER_"/>
+    </changeSet>
+</databaseChangeLog>

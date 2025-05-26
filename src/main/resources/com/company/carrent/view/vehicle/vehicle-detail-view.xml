@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://vehicleDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="vehicleDc"
+                  class="com.company.carrent.entity.Vehicle">
+            <fetchPlan extends="_base">
+                <property name="booking" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="vehicleDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="vehicleDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <textField id="registerNoField" property="registerNo"/>
+            <textField id="brandField" property="brand"/>
+            <textField id="modelField" property="model"/>
+            <textField id="seatsField" property="seats"/>
+            <textField id="pricePerDayField" property="pricePerDay"/>
+            <textField id="locationField" property="location"/>
+            <select id="statusField" property="status"/>
+            <entityPicker id="bookingField" property="booking">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
