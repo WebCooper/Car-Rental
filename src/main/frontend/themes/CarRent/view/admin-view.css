@@ -1,0 +1,99 @@
+/* Admin header styling */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--lumo-space-l);
+}
+
+.header-right-section {
+    margin-left: auto;
+}
+
+.admin-welcome-title {
+    text-align: center;
+    color: var(--lumo-primary-text-color);
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: var(--lumo-space-xl);
+}
+
+/* Cards container */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--lumo-space-xl);
+    align-items: center;
+}
+
+.second-row {
+    margin-top: var(--lumo-space-l);
+}
+
+/* Individual card styling */
+.admin-card {
+    background: var(--lumo-base-color);
+    border-radius: var(--lumo-border-radius-l);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--lumo-contrast-10pct);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: var(--lumo-space-m);
+    min-height: 250px;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Card content styling */
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: var(--lumo-space-m);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--lumo-primary-text-color);
+    margin: var(--lumo-space-s) 0;
+    text-align: center;
+}
+
+.card-description {
+    color: var(--lumo-secondary-text-color);
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: var(--lumo-space-l);
+    font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .cards-container hbox {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .admin-card {
+        width: 280px !important;
+        margin: var(--lumo-space-s);
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-card {
+        width: 90% !important;
+        max-width: 300px;
+    }
+
+    .admin-welcome-title {
+        font-size: 2rem;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        gap: var(--lumo-space-m);
+        text-align: center;
+    }
+}

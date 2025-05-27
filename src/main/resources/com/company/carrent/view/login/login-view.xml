@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
-      focusComponent="login"
-      title="msg://LoginView.title">
-    <layout justifyContent="CENTER" alignItems="CENTER" classNames="jmix-login-main-layout">
-        <loginForm id="login"
-                   forgotPasswordButtonVisible="false">
-            <form title="msg://loginForm.headerTitle"
-                  username="msg://loginForm.username"
-                  password="msg://loginForm.password"
-                  rememberMe="msg://loginForm.rememberMe"
-                  submit="msg://loginForm.submit"
-                  forgotPassword="msg://loginForm.forgotPassword"/>
-            <errorMessage title="msg://loginForm.errorTitle"
-                          message="msg://loginForm.badCredentials"
-                          username="msg://loginForm.errorUsername"
-                          password="msg://loginForm.errorPassword"/>
-        </loginForm>
-    </layout>
+        focusComponent="login"
+        title="msg://LoginView.title">
+      <layout justifyContent="CENTER" alignItems="CENTER" classNames="jmix-login-main-layout">
+          <hbox width="100%" height="100%" spacing="true" padding="true">
+
+              <vbox width="50%" height="100%" justifyContent="CENTER" alignItems="CENTER">
+                  <div classNames="login-info-card" width="80%">
+                      <vbox spacing="true" padding="true" alignItems="CENTER">
+                          <image id="logoImage"
+                                 resource="images/car-rental.png"
+                                 width="200px"
+                                 height="AUTO"
+                                 classNames="login-logo"/>
+                          <h2 text="Find the perfect vehicle for your vacation."
+                              classNames="info-title"/>
+                          <span text="You can search vehicles by brand, model and your nearest location."
+                                classNames="login-info-text"/>
+                          <button id="infoButton"
+                                  text="Find a Vehicle"
+                                  themeNames="primary large"
+                                  width="AUTO"
+                                  classNames="info-button"/>
+                      </vbox>
+                  </div>
+              </vbox>
+
+
+              <vbox width="50%" height="100%" justifyContent="CENTER" alignItems="CENTER">
+                  <loginForm id="login"
+                             forgotPasswordButtonVisible="false">
+                      <form username="msg://loginForm.username"
+                            password="msg://loginForm.password"
+                            rememberMe="msg://loginForm.rememberMe"
+                            submit="msg://loginForm.submit"
+                            forgotPassword="msg://loginForm.forgotPassword"/>
+                      <errorMessage title="msg://loginForm.errorTitle"
+                                    message="msg://loginForm.badCredentials"
+                                    username="msg://loginForm.errorUsername"
+                                    password="msg://loginForm.errorPassword"/>
+                  </loginForm>
+              </vbox>
+          </hbox>
+      </layout>
 </view>

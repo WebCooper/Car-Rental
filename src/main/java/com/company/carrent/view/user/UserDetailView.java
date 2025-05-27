@@ -2,6 +2,9 @@ package com.company.carrent.view.user;
 
 import com.company.carrent.entity.User;
 import com.company.carrent.entity.UserRole;
+import com.company.carrent.security.AdminRole;
+import com.company.carrent.security.CustomerRole;
+import com.company.carrent.security.StaffRole;
 import com.company.carrent.view.main.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.notification.Notification;
@@ -14,6 +17,10 @@ import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import io.jmix.security.role.assignment.RoleAssignmentRepository;
+import io.jmix.securitydata.entity.RoleAssignmentEntity;
+import io.jmix.security.role.ResourceRoleRepository;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -44,6 +51,13 @@ public class UserDetailView extends StandardDetailView<User> {
     private PasswordEncoder passwordEncoder;
     @ViewComponent("timeZoneField")
     private JmixComboBox<String> timeZoneField1;
+
+    @Autowired
+    private RoleAssignmentRepository roleAssignmentRepository;
+
+    @Autowired
+    private ResourceRoleRepository resourceRoleRepository;
+
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -80,10 +94,26 @@ public class UserDetailView extends StandardDetailView<User> {
         if (entityStates.isNew(getEditedEntity())) {
             getEditedEntity().setPassword(passwordEncoder.encode(passwordField.getValue()));
 
-            notifications.create(messageBundle.getMessage("noAssignedRolesNotification"))
-                    .withType(Notifications.Type.WARNING)
+            // Assign role based on user's role enum
+            String roleCode = switch (getEditedEntity().getRole()) {
+                case CUSTOMER -> CustomerRole.CODE;
+                case STAFF -> StaffRole.CODE;
+                case ADMIN -> AdminRole.CODE;
+            };
+
+            // Assign the appropriate role to the new user
+            RoleAssignmentEntity roleAssignment = getViewData().getDataContext().create(RoleAssignmentEntity.class);
+            roleAssignment.setUsername(getEditedEntity().getUsername());
+            roleAssignment.setRoleCode(roleCode);
+            roleAssignment.setRoleType("resource");
+
+            getViewData().getDataContext().save();
+
+            notifications.create(messageBundle.getMessage("userCreatedWithRole"))
+                    .withType(Notifications.Type.SUCCESS)
                     .withPosition(Notification.Position.TOP_END)
                     .show();
         }
     }
+
 }
