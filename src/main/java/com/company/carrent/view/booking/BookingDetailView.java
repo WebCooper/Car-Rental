@@ -1,13 +1,12 @@
 package com.company.carrent.view.booking;
 
-import com.company.carrent.entity.Booking;
-import com.company.carrent.entity.Vehicle;
-import com.company.carrent.entity.VehicleStatus;
+import com.company.carrent.entity.*;
 import com.company.carrent.view.main.MainView;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.component.valuepicker.EntityPicker;
 import io.jmix.flowui.model.InstanceContainer;
@@ -18,7 +17,9 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Route(value = "bookings/:id", layout = MainView.class)
+import static com.github.javaparser.utils.CodeGenerationUtils.f;
+
+@Route(value = "bookings/:id")
 @ViewController(id = "Booking.detail")
 @ViewDescriptor(path = "booking-detail-view.xml")
 @EditedEntityContainer("bookingDc")
@@ -39,6 +40,9 @@ public class BookingDetailView extends StandardDetailView<Booking> {
     @Autowired
     private DataManager dataManager;
 
+    @Autowired
+    private CurrentAuthentication  currentAuthentication;
+
     private Vehicle previousVehicle;
 
     @ViewComponent
@@ -55,6 +59,27 @@ public class BookingDetailView extends StandardDetailView<Booking> {
         });
         startDateField.addValueChangeListener(e -> calculateTotal());
         endDateField.addValueChangeListener(e -> calculateTotal());
+    }
+
+    @Subscribe
+    public void onInitEntity(final InitEntityEvent<Booking> event) {
+        String currentUsername = currentAuthentication.getUser().getUsername();
+        User currentUser = dataManager.load(User.class)
+                .query("select u from User u where u.username = :username")
+                .parameter("username", currentUsername)
+                .one();
+
+        if (currentUser != null) {
+            Booking booking = event.getEntity();
+
+            // Check if user is customer and set the customer field
+            if (currentUser.getRole() == UserRole.CUSTOMER) {
+                booking.setCustomer(currentUser);
+            }
+
+            // Always set createdBy for any user type
+            booking.setCreatedBy(currentUser);
+        }
     }
 
     private void calculateTotal() {

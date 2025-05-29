@@ -9,7 +9,7 @@
     </actions>
     <appLayout>
         <navigationBar>
-            <header id="header" classNames="jmix-main-view-header admin-header">
+            <header id="header" classNames="jmix-main-view-header custom-header">
                 <h1 id="viewTitle" classNames="jmix-main-view-title">Admin Dashboard</h1>
                 <hbox classNames="header-right-section" spacing="true" alignItems="CENTER">
                     <userIndicator id="userIndicator"/>

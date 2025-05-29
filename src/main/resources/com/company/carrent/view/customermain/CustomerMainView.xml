@@ -1,42 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <mainView xmlns="http://jmix.io/schema/flowui/main-view"
-    title="msg://customermainview.title">
+          title="msg://customerMainView.title">
     <actions>
         <action id="logoutAction" type="logout"/>
+        <action id="myBookingsAction" text="My Bookings"/>
+        <action id="searchVehiclesAction" text="Search Vehicles"/>
     </actions>
     <appLayout>
         <navigationBar>
-            <header id="header" classNames="jmix-main-view-header">
-                <drawerToggle id="drawerToggle"
-                              classNames="jmix-main-view-drawer-toggle"
-                              themeNames="contrast"
-                              ariaLabel="msg://drawerToggle.ariaLabel"/>
-                <h1 id="viewTitle" classNames="jmix-main-view-title"/>
-            </header>
-        </navigationBar>
-        <drawerLayout>
-            <section id="section" classNames="jmix-main-view-section">
-                <h2 id="applicationTitle"
-                    classNames="jmix-main-view-application-title">
-                    <anchor id="baseLink"
-                            href="."
-                            text="Customer Portal"
-                            classNames="jmix-main-view-application-title-base-link"/>
-                </h2>
-                <nav id="navigation"
-                     classNames="jmix-main-view-navigation"
-                     ariaLabel="msg://navigation.ariaLabel">
-                    <listMenu id="menu"/>
-                </nav>
-                <footer id="footer" classNames="jmix-main-view-footer">
+            <header id="header" classNames="jmix-main-view-header custom-header">
+                <h1 id="viewTitle" classNames="jmix-main-view-title">Customer Dashboard</h1>
+                <hbox classNames="header-right-section" spacing="true" alignItems="CENTER">
                     <userIndicator id="userIndicator"/>
                     <button id="logoutButton"
                             action="logoutAction"
+                            text="Logout"
+                            themeNames="tertiary"
                             classNames="jmix-logout-button"/>
-                </footer>
-            </section>
-        </drawerLayout>
+                </hbox>
+            </header>
+        </navigationBar>
         <initialLayout>
+            <vbox width="100%" height="100%" padding="true" spacing="true" classNames="customer-main-content">
+                <h2 text="Welcome to Customer Dashboard" classNames="customer-welcome-title"/>
+                <div classNames="cards-container">
+                    <hbox width="100%" spacing="true" justifyContent="CENTER">
+                        <!-- My Bookings Card -->
+                        <div classNames="customer-card" width="300px">
+                            <vbox spacing="true" padding="true" alignItems="CENTER">
+                                <span classNames="card-icon">📋</span>
+                                <h3 text="My Bookings" classNames="card-title"/>
+                                <span text="View and manage your bookings" classNames="card-description"/>
+                                <button id="myBookingsButton"
+                                        action="myBookingsAction"
+                                        text="View My Bookings"
+                                        themeNames="primary"
+                                        width="100%"/>
+                            </vbox>
+                        </div>
+
+                        <!-- Search Vehicles Card -->
+                        <div classNames="customer-card" width="300px">
+                            <vbox spacing="true" padding="true" alignItems="CENTER">
+                                <span classNames="card-icon">🚗</span>
+                                <h3 text="Search Vehicles" classNames="card-title"/>
+                                <span text="Browse available vehicles for rent" classNames="card-description"/>
+                                <button id="searchVehiclesButton"
+                                        action="searchVehiclesAction"
+                                        text="Search Vehicles"
+                                        themeNames="primary"
+                                        width="100%"/>
+                            </vbox>
+                        </div>
+                    </hbox>
+                </div>
+            </vbox>
         </initialLayout>
     </appLayout>
 </mainView>

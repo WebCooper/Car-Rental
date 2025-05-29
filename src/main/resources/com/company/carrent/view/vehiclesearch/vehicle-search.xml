@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://vehicleSearchView.title"
+      focusComponent="brandField">
+    <data>
+        <collection id="vehiclesDc"
+                    class="com.company.carrent.entity.Vehicle">
+            <fetchPlan extends="_base">
+                <property name="booking" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="vehiclesDl">
+                <query>
+                    <![CDATA[select v from Vehicle v order by v.brand, v.model]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <layout>
+        <vbox id="mainVBox" padding="true" spacing="true">
+            <!-- Search Filters Section -->
+            <groupBox id="filtersGroupBox" caption="msg://filters.caption" collapsible="true">
+                <vbox spacing="true" padding="true">
+                    <hbox spacing="true" alignItems="END">
+                        <textField id="brandField"
+                                   label="msg://brand.label"
+                                   clearButtonVisible="true"
+                                   width="200px"/>
+                        <textField id="modelField"
+                                   label="msg://model.label"
+                                   clearButtonVisible="true"
+                                   width="200px"/>
+                        <textField id="registerNoField"
+                                   label="msg://registerNo.label"
+                                   clearButtonVisible="true"
+                                   width="200px"/>
+                        <numberField id="seatsField"
+                                     label="msg://seats.label"
+                                     clearButtonVisible="true"
+                                     width="120px"/>
+                    </hbox>
+                    <hbox spacing="true" alignItems="END">
+                        <numberField id="minPriceField"
+                                     label="msg://minPrice.label"
+                                     clearButtonVisible="true"
+                                     width="150px"/>
+                        <numberField id="maxPriceField"
+                                     label="msg://maxPrice.label"
+                                     clearButtonVisible="true"
+                                     width="150px"/>
+                        <textField id="locationField"
+                                   label="msg://location.label"
+                                   clearButtonVisible="true"
+                                   width="200px"/>
+                    </hbox>
+                    <hbox spacing="true">
+                        <button id="searchBtn"
+                                text="msg://search.action"
+                                icon="SEARCH"
+                                themeNames="primary"/>
+                        <button id="clearBtn"
+                                text="msg://clear.action"
+                                icon="REFRESH"/>
+                    </hbox>
+                </vbox>
+            </groupBox>
+
+            <!-- Results Section -->
+            <groupBox id="resultsGroupBox" caption="msg://results.caption">
+                <vbox spacing="false" padding="false" expand="vehiclesDataGrid">
+                    <dataGrid id="vehiclesDataGrid"
+                              dataContainer="vehiclesDc"
+                              width="100%"
+                              minHeight="400px">
+                        <columns>
+                            <column property="registerNo" width="150px"/>
+                            <column property="brand" width="120px"/>
+                            <column property="model" width="150px"/>
+                            <column property="seats" width="80px"/>
+                            <column property="pricePerDay" width="120px"/>
+                            <column property="location" width="150px"/>
+                            <column property="status" width="100px"/>
+                        </columns>
+                    </dataGrid>
+                </vbox>
+            </groupBox>
+        </vbox>
+    </layout>
+</view>

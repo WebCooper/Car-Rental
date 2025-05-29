@@ -5,10 +5,10 @@
         <item view="User.list" title="msg://com.company.carrent.view.user/UserListView.title"/>
         <item view="Vehicle.list" title="msg://com.company.carrent.view.vehicle/vehicleListView.title"/>
         <item view="Booking.list" title="msg://com.company.carrent.view.booking/bookingListView.title"/>
-        <item view="Customermainview" id="CustomerMainView"
+        <item view="CustomerMainView" id="CustomerMainView"
               title="msg://com.company.carrent.view.customermain/customermainview.title"/>
-        <item view="Staffmainview" title="msg://com.company.carrent.view.staffmain/staffMainView.title"
-              id="Staffmainview"/>
+        <item view="StaffMainView" id="StaffMainView"
+              title="msg://com.company.carrent.view.staffmain/staffMainView.title"/>
         <item view="AdminMainView" id="AdminMainView"
               title="msg://com.company.carrent.view.adminmain/adminMainView.title"/>
     </menu>

@@ -107,6 +107,14 @@ public class UserDetailView extends StandardDetailView<User> {
             roleAssignment.setRoleCode(roleCode);
             roleAssignment.setRoleType("resource");
 
+            // If user is a customer, also assign the restricted booking role
+            if (getEditedEntity().getRole() == UserRole.CUSTOMER) {
+                RoleAssignmentEntity restrictedBookingRole = getViewData().getDataContext().create(RoleAssignmentEntity.class);
+                restrictedBookingRole.setUsername(getEditedEntity().getUsername());
+                restrictedBookingRole.setRoleCode("restricted-booking-role");
+                restrictedBookingRole.setRoleType("resource");
+            }
+
             getViewData().getDataContext().save();
 
             notifications.create(messageBundle.getMessage("userCreatedWithRole"))

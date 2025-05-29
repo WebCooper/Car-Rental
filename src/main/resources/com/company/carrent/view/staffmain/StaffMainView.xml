@@ -3,40 +3,72 @@
           title="msg://staffMainView.title">
     <actions>
         <action id="logoutAction" type="logout"/>
+        <action id="openCustomersAction" text="Users"/>
+        <action id="openVehiclesAction" text="Vehicles"/>
+        <action id="openBookingsAction" text="Bookings"/>
     </actions>
     <appLayout>
         <navigationBar>
-            <header id="header" classNames="jmix-main-view-header">
-                <drawerToggle id="drawerToggle"
-                              classNames="jmix-main-view-drawer-toggle"
-                              themeNames="contrast"
-                              ariaLabel="msg://drawerToggle.ariaLabel"/>
-                <h1 id="viewTitle" classNames="jmix-main-view-title"/>
-            </header>
-        </navigationBar>
-        <drawerLayout>
-            <section id="section" classNames="jmix-main-view-section">
-                <h2 id="applicationTitle"
-                    classNames="jmix-main-view-application-title">
-                    <anchor id="baseLink"
-                            href="."
-                            text="Staff Dashboard"
-                            classNames="jmix-main-view-application-title-base-link"/>
-                </h2>
-                <nav id="navigation"
-                     classNames="jmix-main-view-navigation"
-                     ariaLabel="msg://navigation.ariaLabel">
-                    <listMenu id="menu"/>
-                </nav>
-                <footer id="footer" classNames="jmix-main-view-footer">
+            <header id="header" classNames="jmix-main-view-header custom-header">
+                <h1 id="viewTitle" classNames="jmix-main-view-title">Staff Dashboard</h1>
+                <hbox classNames="header-right-section" spacing="true" alignItems="CENTER">
                     <userIndicator id="userIndicator"/>
                     <button id="logoutButton"
                             action="logoutAction"
+                            text="Logout"
+                            themeNames="tertiary"
                             classNames="jmix-logout-button"/>
-                </footer>
-            </section>
-        </drawerLayout>
+                </hbox>
+            </header>
+        </navigationBar>
         <initialLayout>
+            <vbox width="100%" height="100%" padding="true" spacing="true" classNames="staff-main-content">
+                <h2 text="Welcome to Staff Dashboard" classNames="staff-welcome-title"/>
+                <div classNames="cards-container">
+                <hbox width="100%" spacing="true" justifyContent="CENTER">
+                    <!-- First Row - 3 cards -->
+                    <div classNames="staff-card" width="300px">
+                        <vbox spacing="true" padding="true" alignItems="CENTER">
+                            <span classNames="card-icon">👥</span>
+                            <h3 text="Manage Customers" classNames="card-title"/>
+                            <span text="View and manage all customers" classNames="card-description"/>
+                            <button id="customersButton"
+                                    action="openCustomersAction"
+                                    text="Open Customers"
+                                    themeNames="primary"
+                                    width="100%"/>
+                        </vbox>
+                    </div>
+
+                    <div classNames="staff-card" width="300px">
+                        <vbox spacing="true" padding="true" alignItems="CENTER">
+                            <span classNames="card-icon">🚗</span>
+                            <h3 text="Manage Vehicles" classNames="card-title"/>
+                            <span text="View and manage vehicle inventory" classNames="card-description"/>
+                            <button id="vehiclesButton"
+                                    action="openVehiclesAction"
+                                    text="Open Vehicles"
+                                    themeNames="primary"
+                                    width="100%"/>
+                        </vbox>
+                    </div>
+
+                    <div classNames="staff-card" width="300px">
+                        <vbox spacing="true" padding="true" alignItems="CENTER">
+                            <span classNames="card-icon">📋</span>
+                            <h3 text="Manage Bookings" classNames="card-title"/>
+                            <span text="View and manage all bookings" classNames="card-description"/>
+                            <button id="bookingsButton"
+                                    action="openBookingsAction"
+                                    text="Open Bookings"
+                                    themeNames="primary"
+                                    width="100%"/>
+                        </vbox>
+                    </div>
+                </hbox>
+                </div>
+
+            </vbox>
         </initialLayout>
     </appLayout>
 </mainView>
