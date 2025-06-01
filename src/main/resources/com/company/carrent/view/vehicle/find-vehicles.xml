@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://findVehicles.title"
+      focusComponent="vehiclesDataGrid">
+    <data>
+        <collection id="vehiclesDc"
+                    class="com.company.carrent.entity.Vehicle">
+            <fetchPlan extends="_base"/>
+            <loader id="vehiclesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Vehicle e where e.status <> 'B'
+                    and (:minSeats is null or e.seats >= :minSeats)
+                    and (:maxSeats is null or e.seats <= :maxSeats)
+                    and (:brand is null or upper(e.brand) like upper(concat('%', :brand, '%')))
+                    and (:location is null or upper(e.location) like upper(concat('%', :location, '%')))
+                    and (:minPrice is null or e.pricePerDay >= :minPrice)
+                    and (:maxPrice is null or e.pricePerDay <= :maxPrice)]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+        <action id="searchAction" text="Search" icon="SEARCH"/>
+        <action id="clearAction" text="Clear" icon="CLOSE"/>
+        <action id="bookVehicleAction" text="Book Vehicle" icon="PLUS" enabled="false"/>
+    </actions>
+    <layout>
+        <details id="filterDetails" summaryText="Vehicle Filters" opened="true">
+            <vbox padding="true" spacing="true">
+                <hbox spacing="true" alignItems="END">
+                    <vbox>
+                        <label text="Seats"/>
+                        <hbox spacing="true">
+                            <integerField id="minSeatsField"
+                                          placeholder="Min seats"
+                                          width="120px"
+                                          min="1"/>
+                            <span text="to"/>
+                            <integerField id="maxSeatsField"
+                                          placeholder="Max seats"
+                                          width="120px"
+                                          min="1"/>
+                        </hbox>
+                    </vbox>
+                    <textField id="brandField"
+                               label="Brand"
+                               placeholder="Enter brand"
+                               width="200px"/>
+                    <textField id="locationField"
+                               label="Location"
+                               placeholder="Enter location"
+                               width="200px"/>
+                </hbox>
+                <hbox spacing="true" alignItems="END">
+                    <vbox>
+                        <label text="Price per Day"/>
+                        <hbox spacing="true">
+                            <bigDecimalField id="minPriceField"
+                                             placeholder="Min price"
+                                             width="120px"
+                                            />
+                            <span text="to"/>
+                            <bigDecimalField id="maxPriceField"
+                                             placeholder="Max price"
+                                             width="120px"
+                                             />
+                        </hbox>
+                    </vbox>
+                    <hbox spacing="true">
+                        <button id="searchButton"
+                                action="searchAction"
+                                themeNames="primary"/>
+                        <button id="clearButton"
+                                action="clearAction"/>
+                    </hbox>
+                </hbox>
+            </vbox>
+        </details>
+        <!-- Original Generic Filter (optional - you can remove this if you only want custom filters) -->
+        <genericFilter id="genericFilter"
+                       dataLoader="vehiclesDl"
+                       visible="false">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="readButton" action="vehiclesDataGrid.readAction"/>
+            <button id="bookVehicleButton" action="bookVehicleAction"/>
+            <simplePagination id="pagination" dataLoader="vehiclesDl"/>
+        </hbox>
+        <dataGrid id="vehiclesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="vehiclesDc"
+                  columnReorderingAllowed="true"
+                  selectionMode="SINGLE">
+            <actions>
+                <action id="readAction" type="list_read">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="bookAction" text="Book Vehicle" icon="PLUS"/>
+            </actions>
+            <columns resizable="true">
+                <column property="registerNo"/>
+                <column property="brand"/>
+                <column property="model"/>
+                <column property="seats"/>
+                <column property="pricePerDay"/>
+                <column property="location"/>
+                <column property="status"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="bookVehicle" action="bookVehicleAction"/>
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

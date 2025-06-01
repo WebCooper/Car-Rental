@@ -19,7 +19,8 @@ public interface StaffRole extends UiMinimalPolicies {
             "MainView", "StaffMainView",
             "Vehicle.list", "Vehicle.detail",
             "Booking.list", "Booking.detail",
-            "User.list", "User.detail"
+            "User.list", "User.detail",
+            "FindVehicles.list"
     })
     @MenuPolicy(menuIds = {"StaffMainView", "Vehicle.list", "Booking.list"})
     @SpecificPolicy(resources = {
@@ -57,6 +58,20 @@ public interface StaffRole extends UiMinimalPolicies {
     @EntityPolicy(entityName = "User", actions = { EntityPolicyAction.ALL})
     @EntityAttributePolicy(entityName = "User", attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     void userEntityAccess();
+
+    @EntityPolicy(entityName = "sec_UserSubstitutionEntity", actions = {
+            EntityPolicyAction.CREATE, EntityPolicyAction.READ,
+            EntityPolicyAction.UPDATE, EntityPolicyAction.DELETE
+    })
+    @EntityAttributePolicy(entityName = "sec_UserSubstitutionEntity", attributes = "*", action = EntityAttributePolicyAction.MODIFY)
+    void userSubstitutionAccess();
+
+    @EntityPolicy(entityName = "sec_RoleAssignmentEntity", actions = {
+            EntityPolicyAction.CREATE, EntityPolicyAction.READ,
+            EntityPolicyAction.UPDATE, EntityPolicyAction.DELETE
+    })
+    @EntityAttributePolicy(entityName = "sec_RoleAssignmentEntity", attributes = "*", action = EntityAttributePolicyAction.MODIFY)
+    void roleAssignmentAccess();
 
 //    // Customer CRUD
 //    @EntityPolicy(entityName = "Customer", actions = {

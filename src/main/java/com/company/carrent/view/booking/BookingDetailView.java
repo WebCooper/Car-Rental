@@ -1,7 +1,6 @@
 package com.company.carrent.view.booking;
 
 import com.company.carrent.entity.*;
-import com.company.carrent.view.main.MainView;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -17,12 +16,11 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static com.github.javaparser.utils.CodeGenerationUtils.f;
-
 @Route(value = "bookings/:id")
 @ViewController(id = "Booking.detail")
 @ViewDescriptor(path = "booking-detail-view.xml")
 @EditedEntityContainer("bookingDc")
+@DialogMode(width = "AUTO", height = "AUTO")
 public class BookingDetailView extends StandardDetailView<Booking> {
 
     @ViewComponent

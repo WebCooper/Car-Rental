@@ -6,6 +6,7 @@
         <action id="openUsersAction" text="Users"/>
         <action id="openVehiclesAction" text="Vehicles"/>
         <action id="openBookingsAction" text="Bookings"/>
+        <action id="searchVehiclesAction" text="Search Vehicles"/>
     </actions>
     <appLayout>
         <navigationBar>
@@ -26,8 +27,8 @@
                 <h2 text="Welcome to Admin Panel" classNames="admin-welcome-title"/>
                 <div classNames="cards-container">
                     <hbox width="100%" spacing="true" justifyContent="CENTER">
-                        <!-- First Row - 3 cards -->
-                        <div classNames="admin-card" width="AUTO">
+                        <!-- First Row - 4 cards -->
+                        <div classNames="admin-card" width="250px">
                             <vbox spacing="true" padding="true" alignItems="CENTER">
                                 <span classNames="card-icon">👥</span>
                                 <h3 text="Manage Users" classNames="card-title"/>
@@ -40,7 +41,7 @@
                             </vbox>
                         </div>
 
-                        <div classNames="admin-card" width="300px">
+                        <div classNames="admin-card" width="250px">
                             <vbox spacing="true" padding="true" alignItems="CENTER">
                                 <span classNames="card-icon">🚗</span>
                                 <h3 text="Manage Vehicles" classNames="card-title"/>
@@ -53,7 +54,7 @@
                             </vbox>
                         </div>
 
-                        <div classNames="admin-card" width="300px">
+                        <div classNames="admin-card" width="250px">
                             <vbox spacing="true" padding="true" alignItems="CENTER">
                                 <span classNames="card-icon">📋</span>
                                 <h3 text="Manage Bookings" classNames="card-title"/>
@@ -65,37 +66,48 @@
                                         width="100%"/>
                             </vbox>
                         </div>
-                    </hbox>
 
-                    <hbox width="100%" spacing="true" justifyContent="CENTER" classNames="second-row">
-                        <!-- Second Row - 2 cards -->
-                        <div classNames="admin-card" width="300px">
+                        <div classNames="admin-card" width="250px">
                             <vbox spacing="true" padding="true" alignItems="CENTER">
-                                <span classNames="card-icon">📊</span>
-                                <h3 text="Reports" classNames="card-title"/>
-                                <span text="Generate and view system reports" classNames="card-description"/>
-                                <button text="Coming Soon"
-                                        themeNames="tertiary"
-                                        width="100%"
-                                        enabled="false"/>
-                            </vbox>
-                        </div>
-
-                        <div classNames="admin-card" width="300px">
-                            <vbox spacing="true" padding="true" alignItems="CENTER">
-                                <span classNames="card-icon">⚙️</span>
-                                <h3 text="Settings" classNames="card-title"/>
-                                <span text="Configure system settings" classNames="card-description"/>
-                                <button text="Coming Soon"
-                                        themeNames="tertiary"
-                                        width="100%"
-                                        enabled="false"/>
+                                <span classNames="card-icon">🔍</span>
+                                <h3 text="Search Vehicles" classNames="card-title"/>
+                                <span text="Browse available vehicles for rent" classNames="card-description"/>
+                                <button id="searchVehiclesButton"
+                                        action="searchVehiclesAction"
+                                        text="Search Vehicles"
+                                        themeNames="primary"
+                                        width="100%"/>
                             </vbox>
                         </div>
                     </hbox>
+
+<!--                    <hbox width="100%" spacing="true" justifyContent="CENTER" classNames="second-row">-->
+<!--                        &lt;!&ndash; Second Row - 2 cards &ndash;&gt;-->
+<!--                        <div classNames="admin-card" width="300px">-->
+<!--                            <vbox spacing="true" padding="true" alignItems="CENTER">-->
+<!--                                <span classNames="card-icon">📊</span>-->
+<!--                                <h3 text="Reports" classNames="card-title"/>-->
+<!--                                <span text="Generate and view system reports" classNames="card-description"/>-->
+<!--                                <button text="Coming Soon"-->
+<!--                                        themeNames="tertiary"-->
+<!--                                        width="100%"-->
+<!--                                        enabled="false"/>-->
+<!--                            </vbox>-->
+<!--                        </div>-->
+
+<!--                        <div classNames="admin-card" width="300px">-->
+<!--                            <vbox spacing="true" padding="true" alignItems="CENTER">-->
+<!--                                <span classNames="card-icon">⚙️</span>-->
+<!--                                <h3 text="Settings" classNames="card-title"/>-->
+<!--                                <span text="Configure system settings" classNames="card-description"/>-->
+<!--                                <button text="Coming Soon"-->
+<!--                                        themeNames="tertiary"-->
+<!--                                        width="100%"-->
+<!--                                        enabled="false"/>-->
+<!--                            </vbox>-->
+<!--                        </div>-->
+<!--                    </hbox>-->
                 </div>
-
-
             </vbox>
         </initialLayout>
     </appLayout>

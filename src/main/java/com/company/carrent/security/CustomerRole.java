@@ -15,7 +15,7 @@ import io.jmix.securityflowui.role.annotation.ViewPolicy;
 public interface CustomerRole extends UiMinimalPolicies {
     String CODE = "customer-role";
 
-    @ViewPolicy(viewIds = {"MainView", "CustomerMainView", "Booking.list","Vehicle.list", "Vehicle.detail", "Booking.detail"})
+    @ViewPolicy(viewIds = {"MainView", "CustomerMainView", "Booking.list","Vehicle.list", "Vehicle.detail", "Booking.detail", "FindVehicles.list"})
     @MenuPolicy(menuIds = {"CustomerMainView", "Booking.list"})
     @SpecificPolicy(resources = {
             "ui.loginToUi",

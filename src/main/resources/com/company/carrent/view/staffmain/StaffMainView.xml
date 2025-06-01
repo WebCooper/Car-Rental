@@ -6,6 +6,7 @@
         <action id="openCustomersAction" text="Users"/>
         <action id="openVehiclesAction" text="Vehicles"/>
         <action id="openBookingsAction" text="Bookings"/>
+        <action id="searchVehiclesAction" text="Search Vehicles"/>
     </actions>
     <appLayout>
         <navigationBar>
@@ -25,50 +26,65 @@
             <vbox width="100%" height="100%" padding="true" spacing="true" classNames="staff-main-content">
                 <h2 text="Welcome to Staff Dashboard" classNames="staff-welcome-title"/>
                 <div classNames="cards-container">
-                <hbox width="100%" spacing="true" justifyContent="CENTER">
-                    <!-- First Row - 3 cards -->
-                    <div classNames="staff-card" width="300px">
-                        <vbox spacing="true" padding="true" alignItems="CENTER">
-                            <span classNames="card-icon">👥</span>
-                            <h3 text="Manage Customers" classNames="card-title"/>
-                            <span text="View and manage all customers" classNames="card-description"/>
-                            <button id="customersButton"
-                                    action="openCustomersAction"
-                                    text="Open Customers"
-                                    themeNames="primary"
-                                    width="100%"/>
-                        </vbox>
-                    </div>
+                    <hbox width="100%" spacing="true" justifyContent="CENTER">
+                        <!-- All 4 cards in one row -->
+                        <div classNames="staff-card" width="250px">
+                            <vbox spacing="true" padding="true" alignItems="CENTER">
+                                <span classNames="card-icon">👥</span>
+                                <h3 text="Manage Customers" classNames="card-title"/>
+                                <span text="View and manage all customers" classNames="card-description"/>
+                                <button id="customersButton"
+                                        action="openCustomersAction"
+                                        text="Open Customers"
+                                        themeNames="primary"
+                                        width="100%"/>
+                            </vbox>
+                        </div>
 
-                    <div classNames="staff-card" width="300px">
-                        <vbox spacing="true" padding="true" alignItems="CENTER">
-                            <span classNames="card-icon">🚗</span>
-                            <h3 text="Manage Vehicles" classNames="card-title"/>
-                            <span text="View and manage vehicle inventory" classNames="card-description"/>
-                            <button id="vehiclesButton"
-                                    action="openVehiclesAction"
-                                    text="Open Vehicles"
-                                    themeNames="primary"
-                                    width="100%"/>
-                        </vbox>
-                    </div>
+                        <div classNames="staff-card" width="250px">
+                            <vbox spacing="true" padding="true" alignItems="CENTER">
+                                <span classNames="card-icon">🚗</span>
+                                <h3 text="Manage Vehicles" classNames="card-title"/>
+                                <span text="View and manage vehicle inventory" classNames="card-description"/>
+                                <button id="vehiclesButton"
+                                        action="openVehiclesAction"
+                                        text="Open Vehicles"
+                                        themeNames="primary"
+                                        width="100%"/>
+                            </vbox>
+                        </div>
 
-                    <div classNames="staff-card" width="300px">
-                        <vbox spacing="true" padding="true" alignItems="CENTER">
-                            <span classNames="card-icon">📋</span>
-                            <h3 text="Manage Bookings" classNames="card-title"/>
-                            <span text="View and manage all bookings" classNames="card-description"/>
-                            <button id="bookingsButton"
-                                    action="openBookingsAction"
-                                    text="Open Bookings"
-                                    themeNames="primary"
-                                    width="100%"/>
-                        </vbox>
-                    </div>
-                </hbox>
+                        <div classNames="staff-card" width="250px">
+                            <vbox spacing="true" padding="true" alignItems="CENTER">
+                                <span classNames="card-icon">📋</span>
+                                <h3 text="Manage Bookings" classNames="card-title"/>
+                                <span text="View and manage all bookings" classNames="card-description"/>
+                                <button id="bookingsButton"
+                                        action="openBookingsAction"
+                                        text="Open Bookings"
+                                        themeNames="primary"
+                                        width="100%"/>
+                            </vbox>
+                        </div>
+
+                        <div classNames="staff-card" width="250px">
+                            <vbox spacing="true" padding="true" alignItems="CENTER">
+                                <span classNames="card-icon">🔍</span>
+                                <h3 text="Search Vehicles" classNames="card-title"/>
+                                <span text="Browse available vehicles for rent" classNames="card-description"/>
+                                <button id="searchVehiclesButton"
+                                        action="searchVehiclesAction"
+                                        text="Search Vehicles"
+                                        themeNames="primary"
+                                        width="100%"/>
+                            </vbox>
+                        </div>
+                    </hbox>
                 </div>
 
+
             </vbox>
+
         </initialLayout>
     </appLayout>
 </mainView>

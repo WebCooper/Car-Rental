@@ -7,7 +7,7 @@ import com.company.carrent.view.main.MainView;
 import com.vaadin.flow.router.Route;
 import io.jmix.flowui.view.*;
 
-@Route(value = "users", layout = AdminMainView.class)
+@Route(value = "users")
 @ViewController(id = "User.list")
 @ViewDescriptor(path = "user-list-view.xml")
 @LookupComponent("usersDataGrid")

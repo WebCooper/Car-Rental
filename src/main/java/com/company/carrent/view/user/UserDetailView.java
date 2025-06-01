@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
-@Route(value = "users/:id", layout = MainView.class)
+@Route(value = "users/:id")
 @ViewController(id = "User.detail")
 @ViewDescriptor(path = "user-detail-view.xml")
 @EditedEntityContainer("userDc")
