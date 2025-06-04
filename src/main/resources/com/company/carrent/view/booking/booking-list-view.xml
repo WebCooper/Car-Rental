@@ -29,8 +29,28 @@
     <actions>
         <action id="selectAction" type="lookup_select"/>
         <action id="discardAction" type="lookup_discard"/>
+        <action id="homeAction" text="Home" icon="HOME"/>
     </actions>
     <layout>
+        <vbox width="95%" maxWidth="1200px" alignSelf="CENTER" spacing="true">
+
+            <hbox id="breadcrumbContainer"
+                  spacing="true"
+                  alignItems="CENTER"
+                  width="100%"
+                  classNames="breadcrumb-container"
+                  padding="false"
+                  margin="false">
+                <button id="homebreadcrumb"
+                        action="homeAction"
+                        themeNames="tertiary-inline"
+                        text="Home"
+                        icon="HOME"/>
+                <span text="/" classNames="breadcrumb-separator"/>
+                <span text="Bookings" classNames="breadcrumb-current"/>
+            </hbox>
+
+            <h2 text="Bookings" width="100%" classNames="page-title"/>
         <genericFilter id="genericFilter"
                        dataLoader="bookingsDl">
             <properties include=".*"/>
@@ -67,5 +87,6 @@
             <button id="selectButton" action="selectAction"/>
             <button id="discardButton" action="discardAction"/>
         </hbox>
+        </vbox>
     </layout>
 </view>

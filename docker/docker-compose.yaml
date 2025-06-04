@@ -1,0 +1,27 @@
+services:
+  application:
+    image: carrentapp
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: CarRent
+
+    networks:
+      - app-network
+    ports:
+      - "6453:5432"
+
+networks:
+  app-network:
+    driver: bridge

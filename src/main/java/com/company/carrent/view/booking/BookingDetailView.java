@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @ViewController(id = "Booking.detail")
 @ViewDescriptor(path = "booking-detail-view.xml")
 @EditedEntityContainer("bookingDc")
-@DialogMode(width = "AUTO", height = "AUTO")
+@DialogMode(width = "64em", height = "AUTO")
 public class BookingDetailView extends StandardDetailView<Booking> {
 
     @ViewComponent

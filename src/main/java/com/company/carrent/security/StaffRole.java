@@ -55,7 +55,7 @@ public interface StaffRole extends UiMinimalPolicies {
     })
     void filterConfigAccess();
 
-    @EntityPolicy(entityName = "User", actions = { EntityPolicyAction.ALL})
+    @EntityPolicy(entityName = "User", actions = {EntityPolicyAction.ALL})
     @EntityAttributePolicy(entityName = "User", attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     void userEntityAccess();
 
@@ -73,11 +73,4 @@ public interface StaffRole extends UiMinimalPolicies {
     @EntityAttributePolicy(entityName = "sec_RoleAssignmentEntity", attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     void roleAssignmentAccess();
 
-//    // Customer CRUD
-//    @EntityPolicy(entityName = "Customer", actions = {
-//            EntityPolicyAction.CREATE, EntityPolicyAction.READ,
-//            EntityPolicyAction.UPDATE, EntityPolicyAction.DELETE
-//    })
-//    @EntityAttributePolicy(entityName = "Customer", attributes = "*", action = EntityAttributePolicyAction.MODIFY)
-//    void customerAccess();
 }

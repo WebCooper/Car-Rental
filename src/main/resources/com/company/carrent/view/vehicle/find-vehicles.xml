@@ -33,98 +33,152 @@
         <action id="searchAction" text="Search" icon="SEARCH"/>
         <action id="clearAction" text="Clear" icon="CLOSE"/>
         <action id="bookVehicleAction" text="Book Vehicle" icon="PLUS" enabled="false"/>
+        <action id="homeAction" text="Home" icon="HOME"/>
     </actions>
     <layout>
-        <details id="filterDetails" summaryText="Vehicle Filters" opened="true">
-            <vbox padding="true" spacing="true">
-                <hbox spacing="true" alignItems="END">
-                    <vbox>
-                        <label text="Seats"/>
-                        <hbox spacing="true">
-                            <integerField id="minSeatsField"
-                                          placeholder="Min seats"
-                                          width="120px"
-                                          min="1"/>
-                            <span text="to"/>
-                            <integerField id="maxSeatsField"
-                                          placeholder="Max seats"
-                                          width="120px"
-                                          min="1"/>
-                        </hbox>
-                    </vbox>
-                    <textField id="brandField"
-                               label="Brand"
-                               placeholder="Enter brand"
-                               width="200px"/>
-                    <textField id="locationField"
-                               label="Location"
-                               placeholder="Enter location"
-                               width="200px"/>
-                </hbox>
-                <hbox spacing="true" alignItems="END">
-                    <vbox>
-                        <label text="Price per Day"/>
-                        <hbox spacing="true">
-                            <bigDecimalField id="minPriceField"
-                                             placeholder="Min price"
-                                             width="120px"
-                                            />
-                            <span text="to"/>
-                            <bigDecimalField id="maxPriceField"
-                                             placeholder="Max price"
-                                             width="120px"
-                                             />
-                        </hbox>
-                    </vbox>
-                    <hbox spacing="true">
-                        <button id="searchButton"
-                                action="searchAction"
-                                themeNames="primary"/>
-                        <button id="clearButton"
-                                action="clearAction"/>
-                    </hbox>
-                </hbox>
-            </vbox>
-        </details>
-        <!-- Original Generic Filter (optional - you can remove this if you only want custom filters) -->
-        <genericFilter id="genericFilter"
-                       dataLoader="vehiclesDl"
-                       visible="false">
-            <properties include=".*"/>
-        </genericFilter>
-        <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button id="readButton" action="vehiclesDataGrid.readAction"/>
-            <button id="bookVehicleButton" action="bookVehicleAction"/>
-            <simplePagination id="pagination" dataLoader="vehiclesDl"/>
-        </hbox>
-        <dataGrid id="vehiclesDataGrid"
+        <!-- Main container with controlled width -->
+        <vbox width="95%" maxWidth="1200px" alignSelf="CENTER" spacing="true">
+
+            <!-- Breadcrumb Navigation -->
+            <hbox id="breadcrumbContainer"
+                  spacing="true"
+                  alignItems="CENTER"
                   width="100%"
-                  minHeight="20em"
-                  dataContainer="vehiclesDc"
-                  columnReorderingAllowed="true"
-                  selectionMode="SINGLE">
-            <actions>
-                <action id="readAction" type="list_read">
-                    <properties>
-                        <property name="openMode" value="DIALOG"/>
-                    </properties>
-                </action>
-                <action id="bookAction" text="Book Vehicle" icon="PLUS"/>
-            </actions>
-            <columns resizable="true">
-                <column property="registerNo"/>
-                <column property="brand"/>
-                <column property="model"/>
-                <column property="seats"/>
-                <column property="pricePerDay"/>
-                <column property="location"/>
-                <column property="status"/>
-            </columns>
-        </dataGrid>
-        <hbox id="lookupActions" visible="false">
-            <button id="bookVehicle" action="bookVehicleAction"/>
-            <button id="selectButton" action="selectAction"/>
-            <button id="discardButton" action="discardAction"/>
-        </hbox>
+                  classNames="breadcrumb-container"
+                  padding="false"
+                  margin="false">
+                <button id="homebreadcrumb"
+                        action="homeAction"
+                        themeNames="tertiary-inline"
+                        text="Home"
+                        icon="HOME"/>
+                <span text="/" classNames="breadcrumb-separator"/>
+                <span text="Find Vehicles" classNames="breadcrumb-current"/>
+            </hbox>
+
+            <h2 text="Find Vehicles" width="100%" classNames="page-title"/>
+
+            <!-- Filter Section -->
+            <details id="filterDetails" summaryText="Vehicle Filters" opened="true" width="100%">
+                <vbox padding="true" spacing="true" width="100%">
+
+                    <!-- First row of filters -->
+                    <hbox spacing="true" alignItems="END" width="100%" justifyContent="BETWEEN">
+                        <vbox alignItems="START">
+                            <label text="Seats"/>
+                            <hbox spacing="true" alignItems="CENTER">
+                                <integerField id="minSeatsField"
+                                              placeholder="Min seats"
+                                              width="100px"
+                                              min="1"/>
+                                <span text="to"/>
+                                <integerField id="maxSeatsField"
+                                              placeholder="Max seats"
+                                              width="100px"
+                                              min="1"/>
+                            </hbox>
+                        </vbox>
+
+                        <vbox alignItems="START">
+                            <textField id="brandField"
+                                       label="Brand"
+                                       placeholder="Enter brand"
+                                       width="180px"/>
+                        </vbox>
+
+                        <vbox alignItems="START">
+                            <textField id="locationField"
+                                       label="Location"
+                                       placeholder="Enter location"
+                                       width="180px"/>
+                        </vbox>
+                    </hbox>
+
+                    <!-- Second row of filters -->
+                    <hbox spacing="true" alignItems="END" width="100%" justifyContent="BETWEEN">
+                        <vbox alignItems="START">
+                            <label text="Price per Day"/>
+                            <hbox spacing="true" alignItems="CENTER">
+                                <bigDecimalField id="minPriceField"
+                                                 placeholder="Min price"
+                                                 width="100px"/>
+                                <span text="to"/>
+                                <bigDecimalField id="maxPriceField"
+                                                 placeholder="Max price"
+                                                 width="100px"/>
+                            </hbox>
+                        </vbox>
+
+                        <!-- Action buttons aligned to the right -->
+                        <hbox spacing="true" alignItems="END">
+                            <button id="searchButton"
+                                    action="searchAction"
+                                    themeNames="primary"
+                                    width="120px"/>
+                            <button id="clearButton"
+                                    action="clearAction"
+                                    width="120px"/>
+                        </hbox>
+                    </hbox>
+                </vbox>
+            </details>
+
+            <!-- Original Generic Filter (hidden) -->
+            <genericFilter id="genericFilter"
+                           dataLoader="vehiclesDl"
+                           visible="false">
+                <properties include=".*"/>
+            </genericFilter>
+
+            <!-- Buttons and Pagination Panel -->
+            <hbox id="buttonsPanel"
+                  classNames="buttons-panel"
+                  spacing="true"
+                  alignItems="CENTER"
+                  justifyContent="BETWEEN"
+                  width="100%">
+                <hbox spacing="true" alignItems="CENTER">
+                    <button id="readButton" action="vehiclesDataGrid.readAction"/>
+                    <button id="bookVehicleButton" action="bookVehicleAction"/>
+                </hbox>
+                <simplePagination id="pagination" dataLoader="vehiclesDl"/>
+            </hbox>
+
+            <!-- Data Grid -->
+            <dataGrid id="vehiclesDataGrid"
+                      width="100%"
+                      minHeight="25em"
+                      dataContainer="vehiclesDc"
+                      columnReorderingAllowed="true"
+                      selectionMode="SINGLE">
+                <actions>
+                    <action id="readAction" type="list_read">
+                        <properties>
+                            <property name="openMode" value="DIALOG"/>
+                        </properties>
+                    </action>
+                    <action id="bookAction" text="Book Vehicle" icon="PLUS"/>
+                    <action id="bookVehicleAction" />
+                </actions>
+                <columns resizable="true">
+                    <column property="registerNo"/>
+                    <column property="brand"/>
+                    <column property="model"/>
+                    <column property="seats"/>
+                    <column property="pricePerDay"/>
+                    <column property="location"/>
+                    <column property="status"/>
+                    <column header="book" key="bookButton"/>
+                </columns>
+            </dataGrid>
+
+            <!-- Lookup Actions (hidden by default) -->
+            <hbox id="lookupActions" visible="false" spacing="true" justifyContent="CENTER">
+                <button id="bookVehicle" action="bookVehicleAction"/>
+                <button id="selectButton" action="selectAction"/>
+                <button id="discardButton" action="discardAction"/>
+            </hbox>
+
+        </vbox>
     </layout>
 </view>
